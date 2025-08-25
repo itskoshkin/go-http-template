@@ -1,0 +1,2 @@
+app: # go-http-template
+  port: 8080 # web server listening port
