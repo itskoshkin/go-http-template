@@ -1,10 +1,10 @@
-package useragent
+package ginutils
 
 import (
 	"strings"
 )
 
-func ShortenUserAgent(ua string) string {
+func formatUserAgent(ua string) string {
 	if ua == "" {
 		return ""
 	}

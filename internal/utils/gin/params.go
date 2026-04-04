@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ExtractIPAndReferer(param gin.LogFormatterParams) (ipAddr string, referer string) {
+func extractIPAndReferer(param gin.LogFormatterParams) (ipAddr string, referer string) {
 	ipAddr = param.ClientIP
 	if realIP := param.Request.Header.Get("X-Real-IP"); realIP != "" {
 		ipAddr = realIP

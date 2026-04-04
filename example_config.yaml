@@ -1,2 +1,14 @@
 app: # go-http-template
-  port: 8080 # web server listening port
+  log:
+    level: "INFO" # "DEBUG", "INFO", "WARN" or "ERROR"
+    log_format: "text" # "text" or "json"
+    log2console: true
+    log2file: true
+    file_path: "./application.log"
+    file_mode: "rotate" # "overwrite", "append" or "rotate"
+    old_logs_folder: "logs/"
+  web:
+    gin_release_mode: true # Hide Gin debug logs
+    host: 0.0.0.0 # bind address; "localhost" for local-only access or "0.0.0.0" to listen all interfaces
+    port: 8080 # listening port
+    shutdown_timeout: 5s # time to wait for graceful HTTP shutdown

@@ -1,42 +1,67 @@
 /*@import url('/static/styles/_.css'); !* Import styles for _ *!*/
 
 @font-face { /* Load custom font */
-  font-family: 'OpenSans Regular'; /* Set font name */
-  src: url('/static/fonts/OpenSans-Regular.ttf') format('truetype'); /* Specify file and format */
-  font-weight: 400;
-  font-style: normal;
+    font-family: 'OpenSans Regular'; /* Set font name */
+    src: url('/static/assets/fonts/OpenSans-Regular.ttf') format('truetype'); /* Specify file and format */
+    font-weight: 400;
+    font-style: normal;
 }
 
 html { /* Full document (root element) */
-  font-size: 24px; /* Set base font size */
+    font-size: 24px; /* Set base font size */
 }
 
 body { /* Body element (overall page layout) */
-  font-family: 'OpenSans Regular', sans-serif; /* Apply custom font */
-  background: #000000; /* Set page background color */
-  color: #FFFFFF; /* Set text color */
-  margin: 0; /* Remove default margin */
-  height: 100vh; /* Set body height to full viewport */
-  display: flex; /* Enable flexbox layout */
-  align-items: center; /* Center content vertically */
-  justify-content: center; /* Center content horizontally */
+    font-family: 'OpenSans Regular', sans-serif; /* Apply custom font */
+    background: #000000; /* Set page background color */
+    color: #FFFFFF; /* Set text color */
+    margin: 0; /* Remove default margin */
+    height: 100vh; /* Set body height to full viewport */
+    display: flex; /* Enable flexbox layout */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
 }
 
 .center-stage { /* Content to be centered vertically and horizontally */
-  width: 100%; /* Set container full width */
-  display: flex; /* Enable flexbox for content */
-  align-items: center; /* Center children horizontally */
-  justify-content: center; /* Center children vertically */
-  flex-direction: column; /* Arrange children vertically */
+    width: 100%; /* Set container full width */
+    display: flex; /* Enable flexbox for content */
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
+    flex-direction: column; /* Arrange children vertically */
 }
 
 h1 { /* Headings */
-  font-size: 1.4rem; /* Set heading font size */
-  margin: 0 0 24px 0; /* Add bottom margin */
+    font-size: 1.4rem; /* Set heading font size */
+    margin: 0 0 24px 0; /* Add bottom margin */
 }
 
 p { /* Paragraphs */
-  font-size: 1rem; /* Set paragraph font size */
-  min-height: 34px; /* Set minimum height to match paragraph line-height */
-  margin-top: 24px; /* Add top margin */
+    font-size: 1rem; /* Set paragraph font size */
+    min-height: 34px; /* Set minimum height to match paragraph line-height */
+    margin-top: 24px; /* Add top margin */
 }
+
+.error-btn-home { /* Home button wrapper */
+    appearance: none; /* Remove native button appearance */
+    -webkit-appearance: none; /* Remove Safari/WebKit default button styling */
+    background: transparent; /* Remove default button background */
+    border: 0; /* Remove default border */
+    padding: 0; /* Remove inner spacing */
+    margin: 0; /* Remove outer spacing */
+    cursor: pointer; /* Show pointer cursor on hover */
+    display: inline-flex; /* Use inline flex layout for icon centering */
+    align-items: center; /* Center icon vertically */
+    justify-content: center; /* Center icon horizontally */
+}
+
+.error-btn-home:focus-visible { /* Keyboard-focus state */
+    outline: 2px solid #fff; /* Show visible white focus ring */
+    outline-offset: 4px; /* Offset outline from button edge */
+}
+
+.btn-icon { /* Home icon image */
+    display: block; /* Remove inline-image baseline gap */
+    width: 24px; /* Set icon width */
+    height: 24px; /* Set icon height */
+}
+

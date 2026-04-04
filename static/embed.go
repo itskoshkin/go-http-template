@@ -7,5 +7,5 @@ import (
 //go:embed templates/*.gohtml
 var TemplatesFS embed.FS
 
-//go:embed styles scripts icons fonts
+//go:embed styles scripts assets
 var PublicFS embed.FS
