@@ -1,0 +1,23 @@
+{{define "error"}}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Go HTTP Template</title>
+        {{template "head"}}
+    </head>
+    <body>
+    <div class="center-stage">
+        {{ if and .ErrorTitle .ErrorDescription }}
+            <h1>{{.ErrorTitle}}</h1>
+            <p>{{.ErrorDescription}}</p>
+        {{ else }}
+            <h1>Error</h1>
+            <p>Something went wrong.</p>
+        {{ end }}
+        <button onclick="goHome()" class="error-btn-home">
+            <img src="/static/assets/icons/home.svg" alt="Home" class="btn-icon">
+        </button>
+    </div>
+    </body>
+    </html>
+{{end}}

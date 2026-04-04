@@ -1,11 +1,11 @@
 FROM golang:1.25-alpine AS builder
 
 ARG BIN_NAME="go-http-template"
-ARG MAIN_PATH="app/main.go"
+ARG MAIN_PATH="cmd/main.go"
 ARG GO_BUILD_FLAGS="-s -w"
 ARG UPX_FLAGS="--best --lzma"
 
-RUN apk add --no-cache upx
+# RUN apk add --no-cache upx
 
 WORKDIR /build
 
@@ -16,7 +16,7 @@ COPY . .
 
 RUN CGO_ENABLED=0 go build -ldflags="$GO_BUILD_FLAGS" -o $BIN_NAME $MAIN_PATH
 
-RUN upx $UPX_FLAGS $BIN_NAME
+# RUN upx $UPX_FLAGS $BIN_NAME
 
 FROM alpine:3.22
 
@@ -27,7 +27,6 @@ RUN addgroup -S app && adduser -S -G app -u 10001 app
 WORKDIR /app
 
 COPY --from=builder --chown=app:app /build/$BIN_NAME ./
-COPY --from=builder --chown=app:app /build/example_config.yaml ./config.yaml
 
 USER app
 

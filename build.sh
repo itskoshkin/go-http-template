@@ -4,7 +4,6 @@ set -e
 
 APP_NAME="go-http-template"
 BUILD_DIR="build"
-STATIC_DIR="static"
 CONFIG_FILE="config.yaml"
 EXAMPLE_CONFIG="example_config.yaml"
 PLATFORMS=(
@@ -25,12 +24,12 @@ for PLATFORM in "${PLATFORMS[@]}"; do
 
   BINARY_NAME="${APP_NAME}-${GOARCH}" # Set name for binary
   if [ "$GOOS" == "windows" ]; then
-    BINARY_NAME="${BINARY_NAME}.exe" # Add .exe extension for Mustdie
+    BINARY_NAME="${BINARY_NAME}.exe" # Add .exe extension for Windows (must die)
   fi
 
    # Build Go binary for target platform
   echo "🔨 Building for $GOOS/$GOARCH..."
-  env GOOS="$GOOS" GOARCH="$GOARCH" go build -ldflags="-s -w" -o "$OUTPUT_DIR/$BINARY_NAME" ./app/main.go
+  env GOOS="$GOOS" GOARCH="$GOARCH" go build -ldflags="-s -w" -o "$OUTPUT_DIR/$BINARY_NAME" ./cmd/main.go
 
   # Copy config
   if [ -f "$CONFIG_FILE" ]; then

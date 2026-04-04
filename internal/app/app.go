@@ -1,24 +1,26 @@
 package app
 
 import (
-	"github.com/gin-gonic/gin"
-
 	"go-http-template/internal/config"
 	"go-http-template/internal/logger"
-	"go-http-template/internal/web"
+	"go-http-template/internal/webserver"
+	"go-http-template/internal/webserver/handlers"
 )
 
 type App struct {
-	Engine *gin.Engine
+	Server *webserver.Server
 }
 
 func New() *App {
 	config.LoadConfig()
-	logger.SetupLogging()
-	gin.SetMode(gin.ReleaseMode)
-	return &App{Engine: web.NewEngine()}
+	logger.SetupLogger()
+
+	h := handlers.NewHandlers()
+	s := webserver.NewServer(h)
+
+	return &App{Server: s}
 }
 
 func (a *App) Run() {
-	web.RunServer(a.Engine)
+	a.Server.Run()
 }
