@@ -19,6 +19,7 @@ import (
 	"go-http-template/internal/utils/gin"
 	"go-http-template/internal/utils/text"
 	"go-http-template/internal/webserver/handlers"
+	"go-http-template/internal/webserver/middlewares"
 	"go-http-template/static"
 )
 
@@ -32,7 +33,9 @@ func NewServer(h *handlers.Handlers) *Server {
 	}
 
 	e := gin.New()
-	_ = e.SetTrustedProxies(nil) // Can nil produce an error? Or can a robot write a symphony?
+	if err := e.SetTrustedProxies(viper.GetStringSlice(config.TrustedProxies)); err != nil {
+		logger.Fatalf("Failed to set trusted proxies: %v", err)
+	}
 	e.HandleMethodNotAllowed = true
 
 	loadStaticFiles(e)
@@ -52,6 +55,7 @@ func loadStaticFiles(e *gin.Engine) {
 
 func registerMiddlewares(e *gin.Engine) {
 	e.Use(ginutils.LoggingMiddlewares()...)
+	e.Use(middlewares.SecurityHeaders())
 }
 
 func registerRoutes(e *gin.Engine, h *handlers.Handlers) {

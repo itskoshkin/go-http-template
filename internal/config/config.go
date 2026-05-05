@@ -21,6 +21,7 @@ const (
 	LogFilesFolder = "app.log.old_logs_folder" // string (path)
 
 	GinReleaseMode           = "app.web.gin_release_mode" // bool
+	TrustedProxies           = "app.web.trusted_proxies"  // []string
 	AppHost                  = "app.web.host"             // string
 	AppPort                  = "app.web.port"             // int
 	WebServerShutdownTimeout = "app.web.shutdown_timeout" // time.Duration
@@ -54,7 +55,7 @@ func getEnv() {
 	viper.AutomaticEnv()
 	var binds = map[string]string{
 		/* Logger */ LogLevel: "LOG_LEVEL", LogFormat: "LOG_FORMAT", LogToConsole: "LOG_TO_CONSOLE", LogToFile: "LOG_TO_FILE", LogFilePath: "LOG_FILE_PATH", LogFileMode: "LOG_FILE_MODE", LogFilesFolder: "LOG_FILES_FOLDER",
-		/* Web Server */ GinReleaseMode: "GIN_RELEASE_MODE", AppHost: "APP_HOST", AppPort: "APP_PORT", WebServerShutdownTimeout: "WEB_SERVER_SHUTDOWN_TIMEOUT",
+		/* Web Server */ GinReleaseMode: "GIN_RELEASE_MODE", TrustedProxies: "TRUSTED_PROXIES", AppHost: "APP_HOST", AppPort: "APP_PORT", WebServerShutdownTimeout: "WEB_SERVER_SHUTDOWN_TIMEOUT",
 	}
 	for k, v := range binds {
 		_ = viper.BindEnv(k, v)
