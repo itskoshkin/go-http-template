@@ -50,6 +50,7 @@ Values can also be set via environment variables (take precedence over config fi
 | `app.web.host`             | `APP_HOST`                    | `0.0.0.0`         | Bind address                                                |
 | `app.web.port`             | `APP_PORT`                    | `8080`            | Listening port                                              |
 | `app.web.gin_release_mode` | `GIN_RELEASE_MODE`            | `true`            | Hide Gin debug output                                       |
+| `app.web.trusted_proxies`  | `TRUSTED_PROXIES`             | `[]`              | Trusted reverse proxy IPs/CIDRs for client IP headers       |
 | `app.web.shutdown_timeout` | `WEB_SERVER_SHUTDOWN_TIMEOUT` | `5s`              | Graceful shutdown timeout                                   |
 | `app.log.level`            | `LOG_LEVEL`                   | `INFO`            | `DEBUG`, `INFO`, `WARN`, `ERROR`                            |
 | `app.log.log_format`       | `LOG_FORMAT`                  | `text`            | `text` or `json`                                            |
@@ -59,6 +60,7 @@ Values can also be set via environment variables (take precedence over config fi
 | `app.log.file_mode`        | `LOG_FILE_MODE`               | `append`          | `append`, `overwrite`, or `rotate`                          |
 | `app.log.old_logs_folder`  | `LOG_FILES_FOLDER`            | —                 | Folder for rotated logs (required when `file_mode: rotate`) |
 
+Use YAML array syntax for `app.web.trusted_proxies`, for example `["127.0.0.1", "::1"]`. When setting it via `TRUSTED_PROXIES`, use a space-separated value such as `127.0.0.1 ::1`.
 
 ## Build & Run
 

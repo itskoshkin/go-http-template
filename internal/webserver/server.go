@@ -33,7 +33,9 @@ func NewServer(h *handlers.Handlers) *Server {
 	}
 
 	e := gin.New()
-	_ = e.SetTrustedProxies(nil) // Can nil produce an error? Or can a robot write a symphony?
+	if err := e.SetTrustedProxies(viper.GetStringSlice(config.TrustedProxies)); err != nil {
+		logger.Fatalf("Failed to set trusted proxies: %v", err)
+	}
 	e.HandleMethodNotAllowed = true
 
 	loadStaticFiles(e)
