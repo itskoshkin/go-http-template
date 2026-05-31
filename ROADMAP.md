@@ -38,6 +38,36 @@ These gaps exist in every repo and are worth solving once, consistently:
 - [ ] **`LICENSE`**.
 - [ ] **Dependabot / Renovate** for dependency updates.
 
+## Shared code: `go-kit` (source-of-truth + sync) — decided
+
+The common infra code is identical across every template (it differs only by
+module import path). To kill drift permanently we extract it into one canonical
+repo, **`go-kit`**, and **sync** (copy/vendor) it into each template — chosen
+model is **source-of-truth + sync**, so there is *no runtime dependency* and
+every template still owns its code.
+
+- `go-kit` holds the canonical files.
+- `make sync` copies them in, rewriting the module path to the template's own
+  (`go-kit/text` → `go-http-template/internal/utils/text`).
+- A CI check (`make sync-check` → `git diff --exit-code`) fails if a template's
+  copy has drifted from `go-kit`.
+
+**Canonical set (lives in `go-kit`):** `utils` (colors, text, gin/{logger,
+params,useragent}, crypto, datetime, noop), `logger` core (text/json/rotate +
+the `*WithID` helpers currently only in svc), `pkg` (postgres, redis, minio),
+gin middlewares (security, cors, ratelimit, request), generic services `auth`
+(JWT) and `mailer` (SMTP, interface-driven).
+
+**Stays template-owned (NOT synced):** domain models/repos/services
+(user, item, image), controllers, frontend, per-template wiring, framework
+adapters (fx logger adapter, gotgbot bridge).
+
+**This template syncs:** `colors`, `text`, `gin/{logger,params,useragent}`,
+`logger` core, `middlewares/security`. (No DB/cache/object pkg here.)
+
+Naming note: `go-kit` (the synced source lib) is distinct from a possible
+`go-lib-template` (a template *for writing* libraries/SDKs) — different things.
+
 ## Planned sibling templates (family-level)
 
 - `go-userbot-template` — Telegram userbot on MTProto (gotd/td) for parsing
